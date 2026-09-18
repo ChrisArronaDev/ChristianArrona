@@ -1,11 +1,6 @@
-import { useState, type CSSProperties } from "react";
-import { orbit } from "../data/content";
+import { TechOrbit } from "./TechOrbit";
 
 export function HeroOriginal() {
-  const [expanded, setExpanded] = useState(true);
-  const [selected, setSelected] = useState<number | null>(null);
-  const detail = selected === null ? null : orbit[selected];
-
   return (
     <section id="top" className="original-hero" data-sec="00">
       <div className="shape shape-square" data-parallax="slow" />
@@ -40,65 +35,7 @@ export function HeroOriginal() {
           </div>
         </div>
 
-        <div
-          className={`orbit-panel${expanded ? " expanded" : " collapsed"}`}
-          data-reveal
-        >
-          <div className="orbit-label">
-            <span>STACK · 09 NODOS</span>
-            <b>{expanded ? "DESPLEGADO" : "AGRUPADO"}</b>
-          </div>
-          <div className="orbit-map">
-            <div className="orbit-ring outer" />
-            <div className="orbit-ring inner" />
-            <button
-              className="orbit-core"
-              onClick={() => {
-                setExpanded((value) => !value);
-                setSelected(null);
-              }}
-              aria-label="Alternar mapa de tecnologías"
-            >
-              <span>FULL</span>
-              <i />
-              <span>STACK</span>
-            </button>
-            {orbit.map((node, index) => {
-              const angle = (index / orbit.length) * Math.PI * 2 - Math.PI / 2;
-              const style = {
-                "--x": `${50 + Math.cos(angle) * 39}%`,
-                "--y": `${50 + Math.sin(angle) * 39}%`,
-              } as CSSProperties;
-              return (
-                <button
-                  className={`orbit-node${selected === index ? " selected" : ""}`}
-                  style={style}
-                  key={node.name}
-                  onClick={() => {
-                    setExpanded(true);
-                    setSelected(index);
-                  }}
-                  onMouseEnter={() => setSelected(index)}
-                  onMouseLeave={() => setSelected(null)}
-                >
-                  <b>{node.abbr}</b>
-                  <span>{node.name}</span>
-                </button>
-              );
-            })}
-          </div>
-          <div className="orbit-caption" aria-live="polite">
-            <span>
-              {detail ? "TECNOLOGÍA" : "PERFIL PROFESIONAL"}{" "}
-              <b>{detail ? "EN USO" : "FULL STACK"}</b>
-            </span>
-            <h3>{detail?.name ?? "Christian Arrona Medina"}</h3>
-            <p>
-              {detail?.detail ??
-                "Frontend, backend, datos e inteligencia artificial aplicada al desarrollo."}
-            </p>
-          </div>
-        </div>
+        <TechOrbit />
       </div>
 
       <div className="spec-strip">

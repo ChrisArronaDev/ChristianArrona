@@ -446,7 +446,7 @@ html[data-cursor="interactive"] .cursor-ring {
     opacity 0.45s ease,
     transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.orbit-node b {
+.orbit-node-icon {
   width: clamp(42px, 5vw, 56px);
   height: clamp(42px, 5vw, 56px);
   border-radius: 50%;
@@ -454,29 +454,116 @@ html[data-cursor="interactive"] .cursor-ring {
   background: var(--bg);
   display: grid;
   place-items: center;
-  font: 600 17px "Fraunces";
-  transition: 0.25s;
+  color: var(--ink);
+  animation: orbit-bob 4.2s ease-in-out infinite;
+  animation-delay: var(--delay);
+  transition:
+    border-color 0.25s,
+    color 0.25s,
+    box-shadow 0.25s;
 }
-.orbit-node span {
+.orbit-node-icon svg {
+  width: 44%;
+  height: 44%;
+}
+.orbit-node > span:last-child {
   font-size: 8px;
   color: var(--muted);
   white-space: nowrap;
 }
-.orbit-node:hover b,
-.orbit-node.selected b {
+.orbit-node:hover .orbit-node-icon,
+.orbit-node.selected .orbit-node-icon {
   border-color: var(--accent);
   color: var(--accent);
   box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 20%, transparent);
 }
-.orbit-panel.collapsed .orbit-node {
+.orbit-panel.collapsed .orbit-node,
+.orbit-panel.loose .orbit-node {
   left: 50%;
   top: 50%;
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.2);
   pointer-events: none;
 }
-.orbit-panel.collapsed .orbit-ring {
+.orbit-panel.collapsed .orbit-ring,
+.orbit-panel.loose .orbit-ring {
   opacity: 0.12;
+}
+.orbit-panel.loose .orbit-core {
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.loose-ball-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+.loose-tech-ball {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 66px;
+  height: 66px;
+  transform: translate3d(-100px, -100px, 0);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  will-change: transform;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+.loose-tech-ball:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--accent) 26%, transparent);
+}
+.loose-tech-ball svg {
+  width: 24px;
+  height: 24px;
+}
+.loose-tech-ball span {
+  max-width: 58px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 7px;
+  letter-spacing: 0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.loose-ball-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+.loose-ball-hint i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
 }
 .orbit-caption {
   border-top: 1px solid var(--line);
@@ -1284,6 +1371,15 @@ html[data-cursor="interactive"] .cursor-ring {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+@keyframes orbit-bob {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-7px) scale(1.04);
+  }
+}
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -1420,8 +1516,16 @@ html[data-cursor="interactive"] .cursor-ring {
   .hero-statement h1 {
     font-size: 39px;
   }
-  .orbit-node span {
+  .orbit-node > span:last-child {
     display: none;
+  }
+  .loose-tech-ball {
+    width: 56px;
+    height: 56px;
+  }
+  .loose-tech-ball svg {
+    width: 20px;
+    height: 20px;
   }
   .spec-strip {
     grid-template-columns: 1fr;

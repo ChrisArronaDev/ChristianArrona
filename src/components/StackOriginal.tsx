@@ -1,4 +1,5 @@
 import { stack } from "../data/content";
+import { FootballBackdrop } from "./FootballBackdrop";
 import { SectionTitle } from "./SectionTitle";
 import { TechnologyIcon } from "./TechnologyIcon";
 export function StackOriginal() {
@@ -9,6 +10,7 @@ export function StackOriginal() {
       className="original-section stack-original"
       data-sec="01"
     >
+      <FootballBackdrop />
       <SectionTitle
         eyebrow="STACK"
         title="Stack en rotación"

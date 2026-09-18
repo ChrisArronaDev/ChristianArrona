@@ -687,6 +687,103 @@ html[data-cursor="interactive"] .cursor-ring {
     transparent
   );
 }
+.stack-original {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.stack-original > :not(.football-backdrop) {
+  position: relative;
+  z-index: 1;
+}
+.football-backdrop {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: 155px;
+  height: min(720px, 72vw);
+  min-height: 520px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.72;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 12%,
+    #000 86%,
+    transparent
+  );
+}
+.football-backdrop svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.football-glow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: football-glow-breathe 8s ease-in-out infinite;
+}
+.football-glow.blue {
+  fill: url(#barca-blue-glow);
+}
+.football-glow.garnet {
+  fill: url(#barca-garnet-glow);
+  animation-delay: -4s;
+}
+.football-pitch {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 16%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 4 9;
+}
+.football-pass-line {
+  fill: none;
+  stroke: #edbb00;
+  stroke-width: 1.2;
+  stroke-dasharray: 3 12;
+  opacity: 0.22;
+  animation: football-pass-dash 12s linear infinite;
+}
+.football-player {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.football-player.blue {
+  color: #1684d6;
+}
+.football-player.garnet {
+  color: #d31862;
+}
+.football-ball circle {
+  fill: #f5f1e7;
+  stroke: #edbb00;
+  stroke-width: 1.5;
+}
+.football-ball path {
+  fill: #111815;
+  stroke: none;
+}
+.football-backdrop-label {
+  position: absolute;
+  right: clamp(28px, 8vw, 130px);
+  bottom: 38px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  opacity: 0.58;
+}
+.football-backdrop-label span {
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, #004d98 50%, #a50044 50%);
+}
 .marquee > div {
   display: flex;
   width: max-content;
@@ -1380,6 +1477,22 @@ html[data-cursor="interactive"] .cursor-ring {
     transform: translateY(-7px) scale(1.04);
   }
 }
+@keyframes football-glow-breathe {
+  0%,
+  100% {
+    opacity: 0.46;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+@keyframes football-pass-dash {
+  to {
+    stroke-dashoffset: -180;
+  }
+}
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -1495,6 +1608,11 @@ html[data-cursor="interactive"] .cursor-ring {
   .bubble-map {
     min-height: auto;
   }
+  .football-backdrop {
+    top: 190px;
+    height: 760px;
+    opacity: 0.58;
+  }
   .spec-strip {
     grid-template-columns: 1fr 1fr;
   }
@@ -1592,5 +1710,10 @@ html[data-cursor="interactive"] .cursor-ring {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+  .football-player,
+  .football-ball,
+  .football-pass-line {
+    display: none;
   }
 }

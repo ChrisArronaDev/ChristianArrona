@@ -1,4 +1,60 @@
-import { SiGithub } from 'react-icons/si'
-import { SectionTitle } from './SectionTitle'
-const cells = Array.from({ length: 91 }, (_, index) => (index * 7 + index % 5) % 5)
-export function ActivityOriginal() { return <section id="actividad" className="activity-section" data-sec="06"><div className="section-inner"><SectionTitle eyebrow="ACTIVIDAD" title="Aprendizaje y práctica" note="FORMACIÓN TÉCNICA · TRABAJO CONTINUO · DOCUMENTACIÓN" /><div className="activity-grid" data-reveal><div><a className="github-profile" href="https://github.com/ChrisArronaDev" target="_blank" rel="noreferrer"><SiGithub /><span><small>PERFIL PÚBLICO</small>@ChrisArronaDev</span><b>VER GITHUB →</b></a><div className="heatmap">{cells.map((level, index) => <i className={`level-${level}`} key={index} />)}</div><p>REPRESENTACIÓN VISUAL DEL APRENDIZAJE — SIN MÉTRICAS INVENTADAS</p></div><div className="course-cards"><article><span>2023</span><h3>Scrum</h3><p>Universidad Tecnológica de León</p></article><article><span>2023</span><h3>NDG Linux Essentials</h3><p>Universidad Tecnológica de León</p></article><article><span>EN LÍNEA</span><h3>Python Total</h3><p>Udemy</p></article></div></div></div></section> }
+import { SiGithub } from "react-icons/si";
+import { SectionTitle } from "./SectionTitle";
+const cells = Array.from(
+  { length: 91 },
+  (_, index) => (index * 7 + (index % 5)) % 5,
+);
+export function ActivityOriginal() {
+  return (
+    <section id="actividad" className="activity-section" data-sec="06">
+      <div className="section-inner">
+        <SectionTitle
+          eyebrow="ACTIVIDAD"
+          title="Aprendizaje y práctica"
+          note="FORMACIÓN TÉCNICA · TRABAJO CONTINUO · DOCUMENTACIÓN"
+        />
+        <div className="activity-grid" data-reveal>
+          <div>
+            <a
+              className="github-profile"
+              href="https://github.com/ChrisArronaDev"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <SiGithub />
+              <span>
+                <small>PERFIL PÚBLICO</small>@ChrisArronaDev
+              </span>
+              <b>VER GITHUB →</b>
+            </a>
+            <div className="heatmap">
+              {cells.map((level, index) => (
+                <i className={`level-${level}`} key={index} />
+              ))}
+            </div>
+            <p>
+              REPRESENTACIÓN VISUAL DEL APRENDIZAJE — SIN MÉTRICAS INVENTADAS
+            </p>
+          </div>
+          <div className="course-cards">
+            <article>
+              <span>2023</span>
+              <h3>Scrum</h3>
+              <p>Universidad Tecnológica de León</p>
+            </article>
+            <article>
+              <span>2023</span>
+              <h3>NDG Linux Essentials</h3>
+              <p>Universidad Tecnológica de León</p>
+            </article>
+            <article>
+              <span>EN LÍNEA</span>
+              <h3>Python Total</h3>
+              <p>Udemy</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

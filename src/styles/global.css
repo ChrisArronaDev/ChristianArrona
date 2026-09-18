@@ -731,9 +731,9 @@ html[data-cursor="interactive"] .cursor-ring {
   animation: football-aura-pulse 2.4s ease-in-out infinite;
 }
 .football-athlete {
-  fill: #091425;
+  fill: url(#football-skin-light);
   stroke: url(#football-rim);
-  stroke-width: 1.6;
+  stroke-width: 0.55;
   stroke-linejoin: round;
 }
 .football-body {
@@ -745,6 +745,7 @@ html[data-cursor="interactive"] .cursor-ring {
   animation: football-arm-swing 0.64s ease-in-out infinite;
 }
 .football-arm-back {
+  transform-origin: 15px -145px;
   animation-delay: -0.32s;
   opacity: 0.65;
 }
@@ -760,22 +761,43 @@ html[data-cursor="interactive"] .cursor-ring {
 .football-boot {
   fill: #060d18;
 }
+.football-shirt {
+  fill: url(#football-fabric);
+}
+.football-shorts,
+.football-sock {
+  fill: #111e30;
+}
+.football-fabric-fold {
+  fill: none;
+  stroke: #667889;
+  stroke-width: 0.7;
+  opacity: 0.22;
+}
+.football-calf {
+  transform-origin: -27px -7px;
+  animation: football-knee-flex 0.64s ease-in-out infinite;
+}
+.football-calf-back {
+  transform-origin: 10px -7px;
+  animation-delay: -0.32s;
+}
 .football-light-number {
-  fill: #5f92c9;
+  fill: #a69d7e;
   stroke: none;
-  font: 700 24px sans-serif;
-  opacity: 0.6;
+  font: 600 20px sans-serif;
+  opacity: 0.38;
 }
 .football-contact-shadow {
-  fill: #477ceb;
-  opacity: 0.18;
+  fill: #02050a;
+  opacity: 0.45;
 }
 .football-light-trail {
   fill: none;
   stroke: #8c386f;
   stroke-width: 2;
   stroke-dasharray: 3 12;
-  opacity: 0.4;
+  opacity: 0.12;
 }
 .football-dribble-ball {
   animation: football-ball-touch 1.28s ease-in-out infinite;
@@ -784,9 +806,9 @@ html[data-cursor="interactive"] .cursor-ring {
   animation: football-ball-roll 1.28s linear infinite;
 }
 .football-ball-spin circle {
-  fill: #a8c2e7;
-  stroke: #459cff;
-  stroke-width: 2;
+  fill: url(#football-ball-shade);
+  stroke: #526271;
+  stroke-width: 0.5;
 }
 .football-ball-spin path {
   fill: #142440;
@@ -1527,28 +1549,28 @@ html[data-cursor="interactive"] .cursor-ring {
 @keyframes football-stride {
   0%,
   100% {
-    transform: translateY(0) rotate(8deg);
+    transform: translateY(0) rotate(12deg);
   }
   50% {
-    transform: translateY(-7px) rotate(12deg);
+    transform: translateY(-3px) rotate(14deg);
   }
 }
 @keyframes football-arm-swing {
   0%,
   100% {
-    transform: rotate(-24deg);
+    transform: rotate(-16deg);
   }
   50% {
-    transform: rotate(24deg);
+    transform: rotate(19deg);
   }
 }
 @keyframes football-leg-swing {
   0%,
   100% {
-    transform: rotate(-32deg);
+    transform: rotate(-24deg);
   }
   50% {
-    transform: rotate(30deg);
+    transform: rotate(26deg);
   }
 }
 @keyframes football-ball-touch {
@@ -1561,6 +1583,18 @@ html[data-cursor="interactive"] .cursor-ring {
   }
   72% {
     transform: translate(56px, 40px);
+  }
+}
+@keyframes football-knee-flex {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  35% {
+    transform: rotate(44deg);
+  }
+  70% {
+    transform: rotate(12deg);
   }
 }
 @keyframes football-ball-roll {

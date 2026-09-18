@@ -1,6 +1,6 @@
 # Portafolio de Christian Arrona
 
-Portafolio profesional desarrollado con Vite, React y TypeScript. La información vive en `src/data/portfolio.ts` y la interfaz está dividida en componentes por sección.
+Portafolio profesional desarrollado con Vite, React y TypeScript. Conserva la dirección visual del diseño original y organiza cada sección en un componente independiente. La información editable vive en `src/data/content.ts`.
 
 ## Desarrollo local
 

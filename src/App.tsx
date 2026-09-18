@@ -1,40 +1,26 @@
-import { useEffect } from 'react'
-import { About } from './components/About'
-import { AITools } from './components/AITools'
-import { Contact } from './components/Contact'
-import { Education } from './components/Education'
-import { Experience } from './components/Experience'
-import { Footer } from './components/Footer'
+import { useEffect, useState } from 'react'
 import { Header } from './components/Header'
-import { Hero } from './components/Hero'
-import { TechStack } from './components/TechStack'
+import { HeroOriginal } from './components/HeroOriginal'
+import { StackOriginal } from './components/StackOriginal'
+import { ProjectsOriginal } from './components/ProjectsOriginal'
+import { DomainOriginal } from './components/DomainOriginal'
+import { AIOriginal } from './components/AIOriginal'
+import { LabOriginal } from './components/LabOriginal'
+import { ActivityOriginal } from './components/ActivityOriginal'
+import { TimelineOriginal } from './components/TimelineOriginal'
+import { SeekingOriginal } from './components/SeekingOriginal'
+import { ContactOriginal } from './components/ContactOriginal'
+import { SideRail } from './components/SideRail'
 
-function App() {
+export default function App() {
+  const [dark, setDark] = useState(() => localStorage.getItem('portfolio-theme') !== 'light')
+  useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; localStorage.setItem('portfolio-theme', dark ? 'dark' : 'light') }, [dark])
   useEffect(() => {
-    const elements = document.querySelectorAll('.reveal')
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible')),
-      { threshold: 0.12 },
-    )
-    elements.forEach((element) => observer.observe(element))
-    return () => observer.disconnect()
+    const nodes = document.querySelectorAll<HTMLElement>('[data-reveal]')
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')), { threshold: 0.08 })
+    nodes.forEach((node) => observer.observe(node))
+    const fallback = window.setTimeout(() => nodes.forEach((node) => node.classList.add('is-visible')), 1400)
+    return () => { observer.disconnect(); window.clearTimeout(fallback) }
   }, [])
-
-  return (
-    <>
-      <Header />
-      <main id="contenido">
-        <Hero />
-        <About />
-        <Experience />
-        <TechStack />
-        <AITools />
-        <Education />
-        <Contact />
-      </main>
-      <Footer />
-    </>
-  )
+  return <div className="portfolio-shell"><Header dark={dark} onTheme={() => setDark((value) => !value)} /><SideRail /><main id="contenido"><HeroOriginal /><StackOriginal /><ProjectsOriginal /><DomainOriginal /><AIOriginal /><LabOriginal /><ActivityOriginal /><TimelineOriginal /><SeekingOriginal /><ContactOriginal /></main></div>
 }
-
-export default App

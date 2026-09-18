@@ -1,0 +1,1 @@
+export function SectionTitle({ eyebrow, title, note, invert = false }: { eyebrow: string; title: string; note?: string; invert?: boolean }) { return <div className={`section-title${invert ? ' invert' : ''}`} data-reveal><span>{eyebrow}</span><h2>{title}</h2>{note && <p>{note}</p>}</div> }

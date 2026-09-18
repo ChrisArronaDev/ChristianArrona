@@ -140,7 +140,9 @@ export function BackgroundFx({ dark }: { dark: boolean }) {
       }
 
       ripples = ripples.filter((ripple) => {
-        const age = (now - ripple.startedAt) / 900;
+        // A click can land between two animation frames, making the first
+        // timestamp fractionally earlier than `performance.now()`.
+        const age = Math.max(0, (now - ripple.startedAt) / 900);
         if (age >= 1) return false;
         context.beginPath();
         context.arc(ripple.x, ripple.y, age * 200, 0, Math.PI * 2);

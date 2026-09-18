@@ -1,112 +1,93 @@
 export function FootballBackdrop() {
-  const players = [
-    {
-      className: "blue",
-      path: "M120 205 C260 135 390 235 530 165 S790 115 930 195",
-      begin: "-1.5s",
-      duration: "14s",
-    },
-    {
-      className: "garnet",
-      path: "M965 315 C805 255 725 355 565 300 S300 245 145 335",
-      begin: "-7s",
-      duration: "16s",
-    },
-    {
-      className: "blue",
-      path: "M260 390 C340 300 430 385 525 255 S720 170 835 245",
-      begin: "-9s",
-      duration: "18s",
-    },
-    {
-      className: "garnet",
-      path: "M820 95 C750 190 645 145 560 225 S355 315 225 250",
-      begin: "-4s",
-      duration: "17s",
-    },
-  ];
+  const playerImage = `${import.meta.env.BASE_URL}images/football-number-10.png`;
 
   return (
     <div className="football-backdrop" aria-hidden="true">
       <svg viewBox="0 0 1100 500" preserveAspectRatio="xMidYMid slice">
         <defs>
           <radialGradient id="barca-blue-glow">
-            <stop offset="0" stopColor="#0068b5" stopOpacity=".42" />
+            <stop offset="0" stopColor="#0068b5" stopOpacity=".58" />
             <stop offset="1" stopColor="#0068b5" stopOpacity="0" />
           </radialGradient>
           <radialGradient id="barca-garnet-glow">
-            <stop offset="0" stopColor="#a50044" stopOpacity=".4" />
+            <stop offset="0" stopColor="#a50044" stopOpacity=".55" />
             <stop offset="1" stopColor="#a50044" stopOpacity="0" />
           </radialGradient>
           <filter
-            id="football-soft-glow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="300%"
+            id="player-shadow"
+            x="-80%"
+            y="-80%"
+            width="260%"
+            height="260%"
           >
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
+            <feDropShadow
+              dx="0"
+              dy="8"
+              stdDeviation="8"
+              floodColor="#000"
+              floodOpacity=".72"
+            />
           </filter>
           <path
-            id="football-pass-path"
-            d="M170 350 C310 170 455 345 560 220 S810 115 950 270"
+            id="star-run-path"
+            d="M140 420 C285 350 360 420 495 370 S710 345 820 375 S905 335 950 350"
           />
         </defs>
 
-        <circle className="football-glow blue" cx="340" cy="245" r="285" />
-        <circle className="football-glow garnet" cx="790" cy="250" r="260" />
+        <circle className="football-glow blue" cx="330" cy="250" r="310" />
+        <circle className="football-glow garnet" cx="790" cy="255" r="290" />
 
         <g className="football-pitch">
-          <rect x="65" y="52" width="970" height="396" rx="12" />
-          <line x1="550" y1="52" x2="550" y2="448" />
-          <circle cx="550" cy="250" r="78" />
+          <rect x="55" y="45" width="990" height="410" rx="14" />
+          <line x1="550" y1="45" x2="550" y2="455" />
+          <circle cx="550" cy="250" r="82" />
           <circle cx="550" cy="250" r="4" />
-          <path d="M65 155h105v190H65M1035 155H930v190h105" />
-          <path d="M65 205h46v90H65M1035 205h-46v90h46" />
+          <path d="M55 148h112v204H55M1045 148H933v204h112" />
         </g>
 
         <path
-          className="football-pass-line"
-          d="M170 350 C310 170 455 345 560 220 S810 115 950 270"
+          className="football-speed-line"
+          d="M105 400 C270 252 355 430 500 303 S775 310 1025 170"
+        />
+        <path
+          className="football-speed-line delayed"
+          d="M90 420 C255 282 365 448 515 328 S790 335 1040 192"
         />
 
-        {players.map((player, index) => (
-          <g
-            className={`football-player ${player.className}`}
-            key={player.path}
-          >
-            <circle cy="-10" r="5" />
-            <path d="M0-4v15M0 3l-9 8M0 3l9 7M0 11l-7 13M0 11l9 12" />
-            <animateMotion
-              path={player.path}
-              begin={player.begin}
-              dur={player.duration}
-              repeatCount="indefinite"
-              rotate="auto"
+        <g className="football-player-motion">
+          <g className="football-player-bob" filter="url(#player-shadow)">
+            <ellipse
+              className="football-player-ground-shadow"
+              cx="0"
+              cy="20"
+              rx="54"
+              ry="10"
             />
-            <animate
-              attributeName="opacity"
-              values=".24;.62;.24"
-              dur={`${7 + index}s`}
-              repeatCount="indefinite"
+            <image
+              className="football-player-cutout"
+              href={playerImage}
+              x="-110"
+              y="-300"
+              width="220"
+              height="330"
+              preserveAspectRatio="xMidYMid meet"
             />
           </g>
-        ))}
-
-        <g className="football-ball" filter="url(#football-soft-glow)">
-          <circle r="7" />
-          <path d="M0-4 4-1 2 4h-4l-3-5z" />
-          <animateMotion dur="8s" repeatCount="indefinite" rotate="auto">
-            <mpath href="#football-pass-path" />
+          <animateMotion
+            dur="12s"
+            repeatCount="indefinite"
+            rotate="0"
+            keyTimes="0;0.35;0.68;1"
+            keyPoints="0;0.36;0.7;1"
+            calcMode="spline"
+            keySplines=".35 0 .25 1;.42 0 .2 1;.4 0 .2 1"
+          >
+            <mpath href="#star-run-path" />
           </animateMotion>
         </g>
       </svg>
       <div className="football-backdrop-label">
-        <span /> VISCA EL FÚTBOL · DETALLE PERSONAL
+        <span /> LA JUGADA DEL 10 · REGATE EN MOVIMIENTO
       </div>
     </div>
   );

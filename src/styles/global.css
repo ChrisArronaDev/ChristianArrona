@@ -701,17 +701,17 @@ html[data-cursor="interactive"] .cursor-ring {
   z-index: 0;
   left: 0;
   right: 0;
-  top: 155px;
+  top: 220px;
   height: min(720px, 72vw);
   min-height: 520px;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.72;
+  opacity: 0.95;
   mask-image: linear-gradient(
     to bottom,
     transparent,
-    #000 12%,
-    #000 86%,
+    #000 4%,
+    #000 96%,
     transparent
   );
 }
@@ -730,11 +730,12 @@ html[data-cursor="interactive"] .cursor-ring {
 }
 .football-film-light {
   position: absolute;
-  inset: 3% 10%;
+  inset: 0 8%;
   background:
-    radial-gradient(ellipse at 40% 48%, #1959a4aa, transparent 57%),
-    radial-gradient(ellipse at 65% 52%, #ac225e88, transparent 58%);
-  filter: blur(20px);
+    radial-gradient(ellipse at 50% 48%, #8f9fc12b, transparent 44%),
+    radial-gradient(ellipse at 38% 48%, #286dbee0, transparent 65%),
+    radial-gradient(ellipse at 67% 52%, #ba356ba6, transparent 65%);
+  filter: blur(26px);
 }
 .football-film {
   position: absolute;
@@ -743,13 +744,8 @@ html[data-cursor="interactive"] .cursor-ring {
   left: 50%;
   transform: translateX(-50%);
   object-fit: contain;
-  filter: drop-shadow(-2px 0 4px #3d76b655) drop-shadow(2px 0 5px #a1336655);
-  mask-image: linear-gradient(
-    transparent 4%,
-    #000 18%,
-    #000 76%,
-    transparent 92%
-  );
+  filter: drop-shadow(-2px 0 5px #779bd060) drop-shadow(2px 0 6px #aa527155);
+  mask-image: linear-gradient(transparent, #000 3%, #000 96%, transparent);
 }
 @media (prefers-reduced-motion: reduce) {
   .football-film-scene {
@@ -783,7 +779,7 @@ html[data-cursor="interactive"] .cursor-ring {
   height: 130px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  background: color-mix(in srgb, var(--surface) 52%, transparent);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -798,6 +794,12 @@ html[data-cursor="interactive"] .cursor-ring {
 }
 .bubble b {
   font: 600 15px "Fraunces";
+}
+.bubble b,
+.bubble small {
+  text-shadow:
+    0 1px 4px var(--bg),
+    0 0 8px var(--bg);
 }
 .bubble small {
   font-size: 7px;
@@ -1559,9 +1561,9 @@ html[data-cursor="interactive"] .cursor-ring {
     min-height: auto;
   }
   .football-backdrop {
-    top: 190px;
+    top: 230px;
     height: 760px;
-    opacity: 0.58;
+    opacity: 0.88;
   }
   .spec-strip {
     grid-template-columns: 1fr 1fr;

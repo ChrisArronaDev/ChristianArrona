@@ -65,7 +65,7 @@ export function FootballBackdrop() {
           tabIndex={-1}
         >
           <source
-            src={`${import.meta.env.BASE_URL}videos/football-shadow-long.webm`}
+            src={`${import.meta.env.BASE_URL}videos/football-shadow-lit.webm`}
             type="video/webm"
           />
         </video>

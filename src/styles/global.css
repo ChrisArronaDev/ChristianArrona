@@ -715,111 +715,46 @@ html[data-cursor="interactive"] .cursor-ring {
     transparent
   );
 }
-.football-backdrop svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.football-light-run {
-  animation: football-run 12s linear infinite;
-}
-.football-light-reveal {
-  animation: football-ignite 12s linear infinite;
-}
-.football-running-aura {
-  transform-origin: 0 -110px;
-  animation: football-aura-pulse 2.4s ease-in-out infinite;
-}
-.football-athlete {
-  fill: url(#football-skin-light);
-  stroke: url(#football-rim);
-  stroke-width: 0.55;
-  stroke-linejoin: round;
-}
-.football-body {
-  animation: football-stride 0.64s ease-in-out infinite;
-  transform-origin: 0 -65px;
-}
-.football-arm {
-  transform-origin: -20px -150px;
-  animation: football-arm-swing 0.64s ease-in-out infinite;
-}
-.football-arm-back {
-  transform-origin: 15px -145px;
-  animation-delay: -0.32s;
-  opacity: 0.65;
-}
-.football-leg {
-  transform-origin: 0 -50px;
-  animation: football-leg-swing 0.64s ease-in-out infinite;
-}
-.football-leg-back {
-  animation-delay: -0.32s;
-  opacity: 0.65;
-}
-.football-hair,
-.football-boot {
-  fill: #060d18;
-}
-.football-shirt {
-  fill: url(#football-fabric);
-}
-.football-shorts,
-.football-sock {
-  fill: #111e30;
-}
-.football-fabric-fold {
-  fill: none;
-  stroke: #667889;
-  stroke-width: 0.7;
-  opacity: 0.22;
-}
-.football-calf {
-  transform-origin: -27px -7px;
-  animation: football-knee-flex 0.64s ease-in-out infinite;
-}
-.football-calf-back {
-  transform-origin: 10px -7px;
-  animation-delay: -0.32s;
-}
-.football-light-number {
-  fill: #a69d7e;
-  stroke: none;
-  font: 600 20px sans-serif;
-  opacity: 0.38;
-}
-.football-contact-shadow {
-  fill: #02050a;
-  opacity: 0.45;
-}
-.football-light-trail {
-  fill: none;
-  stroke: #8c386f;
-  stroke-width: 2;
-  stroke-dasharray: 3 12;
-  opacity: 0.12;
-}
-.football-dribble-ball {
-  animation: football-ball-touch 1.28s ease-in-out infinite;
-}
-.football-ball-spin {
-  animation: football-ball-roll 1.28s linear infinite;
-}
-.football-ball-spin circle {
-  fill: url(#football-ball-shade);
-  stroke: #526271;
-  stroke-width: 0.5;
-}
-.football-ball-spin path {
-  fill: #142440;
-  stroke: #142440;
-  stroke-width: 1.5;
-}
 .marquee > div {
   display: flex;
   width: max-content;
   gap: 10px;
   animation: marquee 52s linear infinite;
+}
+.football-film-scene {
+  --scene-opacity: 0;
+  position: absolute;
+  inset: 0;
+  opacity: var(--scene-opacity);
+  transition: opacity 180ms linear;
+}
+.football-film-light {
+  position: absolute;
+  inset: 3% 10%;
+  background:
+    radial-gradient(ellipse at 40% 48%, #1959a4aa, transparent 57%),
+    radial-gradient(ellipse at 65% 52%, #ac225e88, transparent 58%);
+  filter: blur(20px);
+}
+.football-film {
+  position: absolute;
+  height: 100%;
+  width: min(100%, 540px);
+  left: 50%;
+  transform: translateX(-50%);
+  object-fit: contain;
+  filter: drop-shadow(-2px 0 4px #3d76b655) drop-shadow(2px 0 5px #a1336655);
+  mask-image: linear-gradient(
+    transparent 4%,
+    #000 18%,
+    #000 76%,
+    transparent 92%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .football-film-scene {
+    display: none;
+  }
 }
 .marquee span {
   display: flex;
@@ -1508,100 +1443,6 @@ html[data-cursor="interactive"] .cursor-ring {
     transform: translateY(-7px) scale(1.04);
   }
 }
-@keyframes football-run {
-  0% {
-    transform: translate(230px, 360px);
-  }
-  35% {
-    transform: translate(450px, 335px);
-  }
-  60% {
-    transform: translate(620px, 370px);
-  }
-  100% {
-    transform: translate(870px, 330px);
-  }
-}
-@keyframes football-ignite {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  12%,
-  80% {
-    opacity: 1;
-  }
-  94% {
-    opacity: 0;
-  }
-}
-@keyframes football-aura-pulse {
-  0%,
-  100% {
-    opacity: 0.65;
-    transform: scale(0.92);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-@keyframes football-stride {
-  0%,
-  100% {
-    transform: translateY(0) rotate(12deg);
-  }
-  50% {
-    transform: translateY(-3px) rotate(14deg);
-  }
-}
-@keyframes football-arm-swing {
-  0%,
-  100% {
-    transform: rotate(-16deg);
-  }
-  50% {
-    transform: rotate(19deg);
-  }
-}
-@keyframes football-leg-swing {
-  0%,
-  100% {
-    transform: rotate(-24deg);
-  }
-  50% {
-    transform: rotate(26deg);
-  }
-}
-@keyframes football-ball-touch {
-  0%,
-  100% {
-    transform: translate(29px, 40px);
-  }
-  45% {
-    transform: translate(76px, 31px);
-  }
-  72% {
-    transform: translate(56px, 40px);
-  }
-}
-@keyframes football-knee-flex {
-  0%,
-  100% {
-    transform: rotate(-8deg);
-  }
-  35% {
-    transform: rotate(44deg);
-  }
-  70% {
-    transform: rotate(12deg);
-  }
-}
-@keyframes football-ball-roll {
-  to {
-    transform: rotate(360deg);
-  }
-}
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -1822,14 +1663,5 @@ html[data-cursor="interactive"] .cursor-ring {
   }
   .football-backdrop * {
     animation: none !important;
-  }
-  .football-light-run {
-    transform: translate(550px, 360px);
-  }
-  .football-light-reveal {
-    opacity: 0.55;
-  }
-  .football-dribble-ball {
-    transform: translate(40px, 40px);
   }
 }

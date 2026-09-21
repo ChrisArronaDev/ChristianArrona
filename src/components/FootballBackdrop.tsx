@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-/** Real footage with a keyed alpha channel; the light follows its reveal. */
+/** Segmented real footage; the light follows the full play's reveal. */
 export function FootballBackdrop() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -26,8 +26,8 @@ export function FootballBackdrop() {
       if (reduced.matches || !Number.isFinite(video.duration)) return;
       const fade = Math.min(
         1,
-        video.currentTime / 0.35,
-        (video.duration - video.currentTime) / 0.4,
+        video.currentTime / 0.65,
+        (video.duration - video.currentTime) / 0.85,
       );
       scene.style.setProperty("--scene-opacity", String(Math.max(0, fade)));
     };
@@ -65,7 +65,7 @@ export function FootballBackdrop() {
           tabIndex={-1}
         >
           <source
-            src={`${import.meta.env.BASE_URL}videos/football-shadow.webm`}
+            src={`${import.meta.env.BASE_URL}videos/football-shadow-long.webm`}
             type="video/webm"
           />
         </video>

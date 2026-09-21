@@ -1054,6 +1054,172 @@ html[data-cursor="interactive"] .cursor-ring {
   gap: 5vw;
   align-items: center;
 }
+.lab-original {
+  position: relative;
+  padding-right: clamp(200px, 20vw, 270px);
+}
+.spider-climb {
+  position: absolute;
+  right: 70px;
+  top: 110px;
+  bottom: 45px;
+  width: 115px;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.spider-wall {
+  position: absolute;
+  inset: 0 15px;
+  border-right: 1px solid var(--line);
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 47px,
+    var(--line) 48px 49px,
+    transparent 50px 96px
+  );
+  opacity: 0.45;
+  mask-image: linear-gradient(transparent, #000 15%, #000 85%, transparent);
+}
+.spider-traveller {
+  position: absolute;
+  width: 110px;
+  height: 150px;
+  left: 0;
+  top: calc(100% - 155px);
+  animation: spider-ascent 16s linear infinite;
+}
+.spider-thread {
+  position: absolute;
+  bottom: calc(100% - 22px);
+  right: 22px;
+  height: 900px;
+  width: 1px;
+  background: linear-gradient(transparent, var(--muted));
+  opacity: 0.38;
+}
+.spider-figure {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 5px 5px #0005);
+}
+.spider-red {
+  fill: url(#spider-red);
+  stroke: #420e23;
+  stroke-width: 1.1;
+}
+.spider-blue {
+  fill: url(#spider-blue);
+  stroke: #10213b;
+  stroke-width: 1.1;
+}
+.spider-web {
+  fill: none;
+  stroke: #380f25;
+  stroke-width: 0.85;
+  opacity: 0.65;
+}
+.spider-eye {
+  fill: #e8f4f5;
+  stroke: #161f2d;
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+}
+.spider-emblem {
+  fill: #111a29;
+  stroke: #111a29;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.spider-body {
+  transform-origin: 90px 110px;
+  animation: spider-weight 2.4s ease-in-out infinite;
+}
+.spider-limb {
+  animation: spider-reach 2.4s ease-in-out infinite;
+}
+.spider-left-arm {
+  transform-origin: 70px 80px;
+}
+.spider-right-arm {
+  transform-origin: 110px 80px;
+  animation-delay: -1.2s;
+}
+.spider-left-leg {
+  transform-origin: 80px 135px;
+  animation-delay: -1.2s;
+}
+.spider-right-leg {
+  transform-origin: 100px 135px;
+}
+.spider-climb[data-active="false"] * {
+  animation-play-state: paused;
+}
+@keyframes spider-ascent {
+  0% {
+    top: calc(100% - 155px);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: -135px;
+    opacity: 0;
+  }
+}
+@keyframes spider-reach {
+  0%,
+  100% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+@keyframes spider-weight {
+  0%,
+  100% {
+    transform: rotate(-3deg) translateY(2px);
+  }
+  50% {
+    transform: rotate(3deg) translateY(-3px);
+  }
+}
+@media (max-width: 700px) {
+  .lab-original {
+    padding-right: clamp(18px, 4vw, 56px);
+  }
+  .spider-climb {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: 190px;
+    margin-top: 20px;
+  }
+  .spider-traveller {
+    left: calc(50% - 55px);
+  }
+  .spider-wall {
+    left: calc(50% - 42px);
+    right: calc(50% - 42px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spider-climb * {
+    animation: none !important;
+  }
+  .spider-traveller {
+    top: calc(50% - 75px);
+    opacity: 1;
+  }
+}
 .terminal {
   background: #07100d;
   border: 1px solid var(--line);

@@ -1,4 +1,5 @@
 import { SectionTitle } from "./SectionTitle";
+import { SpiderClimber } from "./SpiderClimber";
 export function LabOriginal() {
   return (
     <section
@@ -11,6 +12,7 @@ export function LabOriginal() {
         title="Laboratorio"
         note="IA, DOCUMENTACIÓN Y AUTOMATIZACIÓN APLICADAS AL DESARROLLO"
       />
+      <SpiderClimber />
       <div className="lab-grid" data-reveal>
         <div className="terminal">
           <header>

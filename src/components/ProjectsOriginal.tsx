@@ -1,5 +1,95 @@
+import { useState } from "react";
 import { cases } from "../data/content";
 import { SectionTitle } from "./SectionTitle";
+import { ProjectIllustration } from "./ProjectIllustration";
+
+function ProjectCard({
+  item,
+  index,
+}: {
+  item: (typeof cases)[number];
+  index: number;
+}) {
+  const [open, setOpen] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const expanded = open || pinned;
+  return (
+    <article
+      className={`project-card ${expanded ? "is-open" : ""}`}
+      data-reveal
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setOpen(true);
+      }}
+      onPointerLeave={() => setOpen(false)}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          setOpen(false);
+          setPinned(false);
+        }
+      }}
+    >
+      <h3 className="project-heading">
+        <button
+          type="button"
+          className="project-trigger"
+          aria-expanded={expanded}
+          aria-controls={`project-panel-${index}`}
+          id={`project-trigger-${index}`}
+          onClick={() => {
+            setPinned(!pinned);
+            setOpen(false);
+          }}
+        >
+          <span className="case-number">0{index + 1}</span>
+          <span className="project-title">
+            <small>
+              {item.type} / {item.code}
+            </small>
+            <span>{item.title}</span>
+          </span>
+          <span className="project-indicator" aria-hidden="true">
+            {expanded ? "−" : "+"}
+          </span>
+        </button>
+      </h3>
+      <div
+        className="project-panel"
+        id={`project-panel-${index}`}
+        role="region"
+        aria-labelledby={`project-trigger-${index}`}
+        aria-hidden={!expanded}
+        inert={!expanded}
+      >
+        <div className="project-panel-inner">
+          <div className="project-preview">
+            <figure className="project-visual">
+              <ProjectIllustration index={index} />
+              <figcaption>
+                ILUSTRACIÓN CONCEPTUAL · NO ES UNA CAPTURA REAL
+              </figcaption>
+            </figure>
+            <div className="project-info">
+              <strong className="project-status">{item.status}</strong>
+              <p className="project-client">{item.client}</p>
+              <p className="project-summary">{item.summary}</p>
+              <h4>Lo esencial</h4>
+              <ul>
+                {item.details.map((detail) => (
+                  <li key={detail}>{detail}</li>
+                ))}
+              </ul>
+              <div className="case-tags">
+                {item.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
 export function ProjectsOriginal() {
   return (
     <section
@@ -10,36 +100,11 @@ export function ProjectsOriginal() {
       <SectionTitle
         eyebrow="PROYECTOS"
         title="Impacto en producto"
-        note="03 EXPEDIENTES · INFORMACIÓN VERIFICADA DEL CV"
+        note="PASA EL CURSOR PARA EXPLORAR · TOCA PARA FIJAR"
       />
       <div className="case-list">
         {cases.map((item, index) => (
-          <article className="case-file" data-reveal key={item.title}>
-            <div className="case-number">0{index + 1}</div>
-            <div className="case-main">
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              <div className="case-tags">
-                {item.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-            </div>
-            <div className="case-detail">
-              <small>
-                {item.type}
-                <br />
-                {item.code}
-              </small>
-              <b>{item.client}</b>
-              <strong>{item.status}</strong>
-              <ul>
-                {item.details.map((detail) => (
-                  <li key={detail}>{detail}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
+          <ProjectCard item={item} index={index} key={item.code} />
         ))}
       </div>
     </section>
